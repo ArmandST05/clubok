@@ -1,0 +1,68 @@
+[23-May-2023 21:00:58 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 21:00:58 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:14:09 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:14:09 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:14:13 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:14:13 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:14:23 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:14:23 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:14:28 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:14:28 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:14:31 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:14:31 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-May-2023 22:59:23 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $contrasena is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[23-May-2023 22:59:23 UTC] PHP Deprecated:  Optional parameter $vendedor_id declared before required parameter $nombre is implicitly treated as a required parameter in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 00:53:11 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 00:53:11 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 00:53:11 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 00:53:11 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 00:53:11 UTC] PHP Deprecated:  Required parameter $nombre follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 01:44:37 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 01:44:37 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 01:44:37 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 01:44:37 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 01:44:37 UTC] PHP Deprecated:  Required parameter $nombre follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 05:44:07 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 05:44:07 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 27
+[24-May-2023 05:44:07 UTC] PHP Deprecated:  Required parameter $nombre_usuario follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 05:44:07 UTC] PHP Deprecated:  Required parameter $contrasena follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[24-May-2023 05:44:07 UTC] PHP Deprecated:  Required parameter $nombre follows optional parameter $vendedor_id in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 60
+[23-Sep-2023 14:37:07 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[23-Sep-2023 14:37:07 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[23-Sep-2023 14:37:11 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[23-Sep-2023 14:37:11 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[23-Sep-2023 14:37:26 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[23-Sep-2023 14:37:26 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[23-Sep-2023 14:37:38 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[23-Sep-2023 14:37:38 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Un[23-Sep-2023 14:52:57 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[HY000] [2002] Connection refused in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/Medoo.php:487
+Stack trace:
+#0 /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php(14): Medoo\Medoo->__construct()
+#1 /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/controller/Login/ValidaLogin.php(4): ModelLogin->__construct()
+#2 {main}
+  thrown in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/Medoo.php on line 487
+[24-Sep-2023 16:14:40 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:14:40 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:14:44 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:14:44 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:14:48 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:14:48 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:15:29 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:15:29 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:15:33 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:15:33 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:16:11 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:16:11 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:16:34 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:16:34 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:16:39 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:16:39 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:16:46 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:16:46 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:16:56 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:16:56 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (/var/cpanel/php/sessions/ea-php74) in Unknown on line 0
+[24-Sep-2023 16:17:04 UTC] PHP Warning:  Unknown: write failed: No space left on device (28) in Unknown on line 0
+[24-Sep-2023 16:17:04 UTC] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the curre[24-Sep-2023 16:43:25 UTC] PHP Fatal error:  Uncaught Error: Call to a member function fetchAll() on null in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php:18
+Stack trace:
+#0 /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/controller/Login/ValidaLogin.php(9): ModelLogin->valida_login('adminTechno', 'Dgas2020.\\')
+#1 {main}
+  thrown in /home/mvillalpando/public_html/PowerPosInsuranceHttSiniestros/model/ModelLogin.php on line 18
