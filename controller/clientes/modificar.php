@@ -16,8 +16,10 @@
 	$telefono = trim($_POST["telefono"]);
 	$telefono_alternativo = trim($_POST["telefono_alternativo"]);
 	$vendedor_id = $_POST["vendedor"];
-	
-	$cliente = $model_cliente->actualizar_cliente($cliente_id,$nombre,$fecha_nacimiento,$calle,$numero,$colonia,$ciudad,$codigo_postal,$estado,$telefono,$telefono_alternativo,$vendedor_id);
+	$curp = $_POST["curp"];
+	$tipo_cliente = $_POST["tipo_cliente"];
+$fecha_registro = $_POST["fecha_registro"];
+	$cliente = $model_cliente->actualizar_cliente($cliente_id,$nombre,$fecha_nacimiento,$calle,$numero,$colonia,$ciudad,$codigo_postal,$estado,$telefono,$telefono_alternativo,$vendedor_id, $curp, $tipo_cliente, $fecha_registro);
 
 	if($cliente){
 		echo "<script>

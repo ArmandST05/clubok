@@ -5,7 +5,8 @@ $model_vehiculo = new ModelVehiculo();
 
 $vehiculo_id = isset($_GET["vehiculo_id"])  ? $_GET['vehiculo_id'] : null;
 $vehiculo = $model_vehiculo->get_vehiculo($vehiculo_id);
-
+$estados = $model_vehiculo->obtenerEstados();
+$tipo_vehiculo = $model_vehiculo->obtenerTipos();
 if (!$vehiculo) {
     echo "<script>
         alert('El vehículo no existe.');
@@ -74,45 +75,81 @@ if (!$vehiculo) {
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="col-lg-12">
-                                <form method="post" name="contact" action="/controller/vehiculos/modificar.php">
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Marca</label>
-                                            <input class="form-control" placeholder="Marca" id="marca" name="marca" type="text" value="<?php echo $vehiculo['marca'] ?>" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Tipo</label>
-                                            <input class="form-control" placeholder="Tipo" id="tipo" name="tipo" type="text" value="<?php echo $vehiculo['tipo'] ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Color</label>
-                                            <input class="form-control" placeholder="Color" id="color" name="color" type="text" value="<?php echo $vehiculo['color'] ?>" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Año</label>
-                                            <input class="form-control" placeholder="Año" id="anio" name="anio" type="number" value="<?php echo $vehiculo['anio'] ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Placa</label>
-                                            <input class="form-control" placeholder="Placa" id="placa" name="placa" type="text" value="<?php echo $vehiculo['placa'] ?>" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Número de Serie: </label>
-                                            <input class="form-control" placeholder="Número de Serie" id="numero_serie" name="numero_serie" type="text" value="<?php echo $vehiculo['numero_serie'] ?>" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <br><input type="submit" value="Guardar" class="btn btn-primary">
-                                            <input type="hidden" name="cliente_id" value="<?php echo $_GET['cliente_id'] ?>" required>
-                                            <input type="hidden" name="vehiculo_id" value="<?php echo $vehiculo_id ?>" required>
-                                        </div>
-                                    </div>
-                                </form>
+<form method="post" name="form1" id="form1" action="../../controller/vehiculos/modificar.php" autocomplete="off">
+    <div class="form-group">
+        <div class="col-lg-5">
+            <label>Marca</label>
+            <input class="form-control" placeholder="Marca" id="marca" name="marca" type="text" value="<?php echo $vehiculo['marca']; ?>" required>
+        </div>
+        <div class="col-lg-5">
+            <label>Submarca</label>
+            <input class="form-control" placeholder="Submarca" id="submarca" name="submarca" type="text" value="<?php echo $vehiculo['submarca']; ?>" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-5">
+            <label>Tipo</label>
+            <select class="form-control" name="tipo" id="tipo" required>
+                <option value="">Seleccione un tipo</option>
+                <?php foreach ($tipo_vehiculo as $tipo) : ?>
+                    <option value="<?php echo $tipo['id']; ?>" <?php if ($vehiculo['tipo_id'] == $tipo['id']) echo 'selected'; ?>>
+                        <?php echo $tipo['nombre']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <div class="col-lg-5">
+            <label>Estado</label>
+            <select class="form-control" name="estado" id="estado" required>
+                <option value="">Seleccione un estado</option>
+                <?php foreach ($estados as $estado) : ?>
+                    <option value="<?php echo $estado['id']; ?>" <?php if ($vehiculo['estado_id'] == $estado['id']) echo 'selected'; ?>>
+                        <?php echo $estado['estado']; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-5">
+            <label>Color</label>
+            <input class="form-control" placeholder="Color" id="color" name="color" type="text" value="<?php echo $vehiculo['color']; ?>" required>
+        </div>
+        <div class="col-lg-5">
+            <label>Año</label>
+            <input class="form-control" placeholder="Año" id="anio" name="anio" type="number" value="<?php echo $vehiculo['anio']; ?>" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-5">
+            <label>Placa</label>
+            <input class="form-control" placeholder="Placa" id="placa" name="placa" type="text" value="<?php echo $vehiculo['placa']; ?>" required>
+        </div>
+        <div class="col-lg-5">
+            <label>Número de Serie</label>
+            <input class="form-control" placeholder="Número de Serie" id="numero_serie" name="numero_serie" type="text" value="<?php echo $vehiculo['numero_serie']; ?>" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-5">
+            <label>Valor</label>
+            <input class="form-control" placeholder="Valor" id="valor" name="valor" type="number" step="0.01" value="<?php echo $vehiculo['valor']; ?>" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-5">
+            <br><input type="submit" value="Actualizar" class="btn btn-primary">
+            <input type="hidden" name="vehiculo_id" value="<?php echo $vehiculo['idvehiculo']; ?>">
+            <input type="hidden" name="cliente_id" value="<?php echo $vehiculo['cliente_id']; ?>">
+        </div>
+    </div>
+</form>
+
                             </div>
                         </div>
                     </div>

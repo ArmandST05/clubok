@@ -144,13 +144,14 @@ $vehiculos = $model_vehiculo->get_vehiculos_cliente($cliente_id);
                         <div class="row">
                             <div class="col-lg-12">
                                 <table class="table table-striped table-bordered table-hover" id="table">
-                                    <tr>
+                                     <tr>
                                         <th>Marca</th>
                                         <th>Tipo</th>
                                         <th>Color</th>
                                         <th>Año</th>
                                         <th>Placa</th>
                                         <th>No. de Serie</th>
+                                        <th>Estado</th>
                                         <th>Pólizas</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -158,12 +159,13 @@ $vehiculos = $model_vehiculo->get_vehiculos_cliente($cliente_id);
                                         $polizas = $model_poliza->get_polizas_vehiculo($vehiculo['idvehiculo']);
                                     ?>
                                         <tr>
-                                            <td><?php echo $vehiculo['marca'] ?></td>
-                                            <td><?php echo $vehiculo['tipo'] ?></td>
-                                            <td><?php echo $vehiculo['color'] ?></td>
-                                            <td><?php echo $vehiculo['anio'] ?></td>
-                                            <td><?php echo $vehiculo['placa'] ?></td>
-                                            <td><?php echo $vehiculo['numero_serie'] ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['marca']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['tiponombre']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['color']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['anio']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['placa']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['numero_serie']); ?></td>
+                                            <td><?php echo htmlspecialchars($vehiculo['estadonombre']); ?></td>
                                             <td>
                                                 <?php foreach ($polizas as $poliza) :
                                                     if ($poliza["estatus"] == 2) {

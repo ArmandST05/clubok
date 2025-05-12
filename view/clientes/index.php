@@ -115,7 +115,7 @@ if ($vendedorId == 0) {
                                     <div class="col-lg-12">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label>Vendedores:</label>
+                                                <label>Verificadores:</label>
                                                 <select class="form-control" name="cobertura" id="cobertura" onchange="seleccionarVendedor(this.value)" required>
                                                     <option value='0' <?php echo ($vendedorId == 0) ? "selected" : "" ?>>TODOS</option>
                                                     <?php foreach ($vendedores as $vendedor) : ?>
@@ -155,8 +155,8 @@ if ($vendedorId == 0) {
                                                         </td>
                                                         <td><?php echo ($cliente["vendedor_id"]) ? $cliente["vendedor_nombre"] : "NO ASIGNADO" ?></td>
                                                         <td>
-                                                            <a href="../vehiculos/index.php?cliente_id=<?php echo $cliente['idcliente'] ?>" class='btn btn-default btn-sm'><i class="fas fa-folder-open fa-fw"></i> Expediente vehículos</a>
-                                                            <a href="../incidentes/index.php?cliente_id=<?php echo $cliente['idcliente'] ?>" class='btn btn-default btn-sm'><i class="fas fa-history fa-fw"></i> Historial Incidentes</a>
+                                                            <a href="../vehiculos/index.php?cliente_id=<?php echo $cliente['idcliente'] ?>" class='btn btn-default btn-sm'><i class="fas fa-folder-open fa-fw"></i>Vehículos Registrados</a>
+                                                            <a href="../incidentes/index.php?cliente_id=<?php echo $cliente['idcliente'] ?>" class='btn btn-default btn-sm'><i class="fas fa-history fa-fw"></i> Historial de Apoyos</a>
                                                             <?php if ($_SESSION["tipo_usuario"] == 1) : ?>
                                                                 <a href="editar.php?cliente_id=<?php echo $cliente['idcliente'] ?>" class='btn btn-default btn-sm'><i class="fas fa-pencil-alt fa-fw"></i> Modificar</a>
                                                                 <form action='/controller/clientes/modificar_estatus.php' method='POST'>

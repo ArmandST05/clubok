@@ -20,30 +20,39 @@ class ModelVehiculo
 	}
 
 
-	function agregar_vehiculo($cliente_id,$marca,$tipo,$color,$anio,$placa,$numero_serie)
-	{
-		return $this->base_datos->insert("vehiculos", [
-			"cliente_id" => $cliente_id,
-			"marca" => $marca,
-			"tipo" => $tipo,
-			"color" => $color,
-			"anio" => $anio,
-			"placa" => $placa,
-			"numero_serie" => $numero_serie
-		]);
-	}
+function agregar_vehiculo($cliente_id, $marca, $submarca, $tipo, $color, $anio, $placa, $numero_serie, $estado, $valor)
+{
+    return $this->base_datos->insert("vehiculos", [
+        "cliente_id"    => $cliente_id,
+        "marca"         => $marca,
+        "submarca"      => $submarca,
+        "tipo_id"          => $tipo,
+        "color"         => $color,
+        "anio"          => $anio,
+        "placa"         => $placa,
+        "numero_serie"  => $numero_serie,
+        "estado_id"        => $estado,
+        "valor"         => $valor
+    ]);
+}
 
-	function actualizar_vehiculo($vehiculo_id,$marca,$tipo,$color,$anio,$placa,$numero_serie)
-	{
-		return $this->base_datos->update("vehiculos", [
-			"marca" => $marca,
-			"tipo" => $tipo,
-			"color" => $color,
-			"anio" => $anio,
-			"placa" => $placa,
-			"numero_serie" => $numero_serie
-		],["idvehiculo[=]" => $vehiculo_id]);
-	}
+
+function actualizar_vehiculo($vehiculo_id, $marca, $submarca, $tipo, $estado, $color, $anio, $placa, $numero_serie, $valor)
+{
+    return $this->base_datos->update("vehiculos", [
+        "marca"         => $marca,
+        "submarca"      => $submarca,
+        "tipo_id"          => $tipo,
+        "estado_id"        => $estado,
+        "color"         => $color,
+        "anio"          => $anio,
+        "placa"         => $placa,
+        "numero_serie"  => $numero_serie,
+        "valor"         => $valor
+    ], [
+        "idvehiculo[=]" => $vehiculo_id
+    ]);
+}
 
 	function delete_vehiculo($id)
 	{
@@ -58,13 +67,35 @@ class ModelVehiculo
 		],["idvehiculo[=]" => $vehiculo_id]);
 	}
 
-	function get_vehiculos_cliente($cliente_id)
-	{
-		return $this->base_datos->select("vehiculos", "*", [
-			"cliente_id" => $cliente_id,
-			"estatus" => 1
-		],["ORDER" => ["idvehiculo" => "DESC"]]);
-	}
+function get_vehiculos_cliente($cliente_id)
+{
+    $sql = "
+        SELECT 
+            v.idvehiculo,
+            v.placa,
+            v.marca,
+            v.color,
+			v.anio,
+            v.numero_serie,
+            v.estado_id,
+            v.tipo_id,
+            v.estatus,
+            e.estado AS estadonombre,
+            t.nombre AS tiponombre
+        FROM vehiculos v
+        INNER JOIN estados e ON v.estado_id = e.id
+        INNER JOIN tipos_vehiculos t ON v.tipo_id = t.id
+        WHERE v.cliente_id = :cliente_id AND v.estatus = 1
+        ORDER BY v.idvehiculo DESC
+    ";
+
+    $stmt = $this->base_datos->pdo->prepare($sql);
+    $stmt->bindParam(':cliente_id', $cliente_id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 
 	function get_vehiculo($id)
 	{
@@ -72,4 +103,16 @@ class ModelVehiculo
 			"idvehiculo" => $id
 		]);
 	}
+function getAll(){
+    $stmt = $this->base_datos->query("SELECT * FROM vehiculos");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Esto es lo que necesitas
+}
+function obtenerEstados(){
+	$stmt = $this->base_datos->query("SELECT * FROM estados");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Esto es lo que necesitas
+}
+function obtenerTipos(){
+	$stmt = $this->base_datos->query("SELECT * FROM tipos_vehiculos");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC); // Esto es lo que necesitas
+}
 }

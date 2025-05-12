@@ -58,24 +58,27 @@ class ModelCliente
 	}
 
 
-	function agregar_cliente($nombre, $fecha_nacimiento, $calle, $numero, $colonia, $ciudad, $codigo_postal, $estado, $telefono, $telefono_alternativo, $vendedor_id = NULL)
-	{
-		return $this->base_datos->insert("clientes", [
-			"nombre" => $nombre,
-			"fecha_nacimiento" => $fecha_nacimiento,
-			"direccion_calle" => $calle,
-			"direccion_numero" => $numero,
-			"direccion_colonia" => $colonia,
-			"direccion_ciudad" => $ciudad,
-			"direccion_codigo_postal" => $codigo_postal,
-			"direccion_estado" => $estado,
-			"telefono" => $telefono,
-			"telefono_alternativo" => $telefono_alternativo,
-			"vendedor_id" => $vendedor_id,
-		]);
-	}
+	function agregar_cliente($nombre, $fecha_nacimiento, $calle, $numero, $colonia, $ciudad, $codigo_postal, $estado, $telefono, $telefono_alternativo, $vendedor_id = NULL, $curp, $tipo_cliente, $fecha_registro)
+{
+    return $this->base_datos->insert("clientes", [
+        "nombre" => $nombre,
+        "fecha_nacimiento" => $fecha_nacimiento,
+        "direccion_calle" => $calle,
+        "direccion_numero" => $numero,
+        "direccion_colonia" => $colonia,
+        "direccion_ciudad" => $ciudad,
+        "direccion_codigo_postal" => $codigo_postal,
+        "direccion_estado" => $estado,
+        "telefono" => $telefono,
+        "telefono_alternativo" => $telefono_alternativo,
+        "vendedor_id" => $vendedor_id,
+        "curp" => $curp,
+        "tipo_cliente_id" => $tipo_cliente,
+        "fecha_registro" => $fecha_registro
+    ]);
+}
 
-	function actualizar_cliente($cliente_id, $nombre, $fecha_nacimiento, $calle, $numero, $colonia, $ciudad, $codigo_postal, $estado, $telefono, $telefono_alternativo, $vendedor_id = NULL)
+	function actualizar_cliente($cliente_id, $nombre, $fecha_nacimiento, $calle, $numero, $colonia, $ciudad, $codigo_postal, $estado, $telefono, $telefono_alternativo, $vendedor_id = NULL, $curp, $tipo_cliente, $fecha_registro)
 	{
 		return $this->base_datos->update("clientes", [
 			"nombre" => $nombre,
@@ -89,6 +92,9 @@ class ModelCliente
 			"telefono" => $telefono,
 			"telefono_alternativo" => $telefono_alternativo,
 			"vendedor_id" => $vendedor_id,
+			"curp" => $curp,
+			"tipo_cliente_id" => $tipo_cliente,
+        "fecha_registro" => $fecha_registro
 		], ["idcliente[=]" => $cliente_id]);
 	}
 
@@ -104,4 +110,9 @@ class ModelCliente
 		$sql = $this->base_datos->query("DELETE FROM clientes WHERE idcliente = '$id'")->fetchAll();
 		return $sql;
 	}
+	public function obtener_tipos_cliente()
+{
+    return $this->base_datos->select("tipos_cliente", "*");
+}
+
 }

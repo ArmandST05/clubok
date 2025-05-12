@@ -1,10 +1,14 @@
 <?php
 require('../session.php');
 include('../../model/ModelCliente.php');
+include('../../model/ModelVehiculo.php');
+
 $model_cliente = new ModelCliente();
 $cliente_id = isset($_GET["cliente_id"])  ? $_GET['cliente_id'] : null;
 $cliente = $model_cliente->get_cliente($cliente_id);
-
+$model_Vehiculo = new ModelVehiculo();
+$estados = $model_Vehiculo->obtenerEstados();
+$tipo_vehiculo = $model_Vehiculo->obtenerTipos();
 if (!$cliente) {
     echo "<script>
         alert('El cliente no existe.');
@@ -72,46 +76,76 @@ if (!$cliente) {
                         <div class="panel-body">
                             <div class="col-lg-12">
 
-                                <form method="post" name="form1" id="form1" action="/controller/vehiculos/insertar.php" autocomplete="off">
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Marca</label>
-                                            <input class="form-control" placeholder="Marca" id="marca" name="marca" type="text" required>
+                                <form method="post" name="form1" id="form1" action="../../controller/vehiculos/insertar.php" autocomplete="off">
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <label>Marca</label>
+                                                <input class="form-control" placeholder="Marca" id="marca" name="marca" type="text" required>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Submarca</label>
+                                                <input class="form-control" placeholder="Submarca" id="submarca" name="submarca" type="text" required>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-5">
-                                            <label>Tipo</label>
-                                            <input class="form-control" placeholder="Tipo" id="tipo" name="tipo" type="text" required>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <label>Tipo</label>
+                                                <select class="form-control" name="tipo" id="tipo" required>
+                                                    <option value="">Seleccione un tipo</option>
+                                                    <?php foreach ($tipo_vehiculo as $vehiculo) : ?>
+                                                        <option value="<?php echo $vehiculo['id']; ?>"><?php echo $vehiculo['nombre']; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Estado</label>
+                                                <select class="form-control" name="estado" id="estado" required>
+                                                    <option value="">Seleccione un estado</option>
+                                                    <?php foreach ($estados as $estado) : ?>
+                                                        <option value="<?php echo $estado['id']; ?>"><?php echo $estado['estado']; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <label>Color</label>
+                                                <input class="form-control" placeholder="Color" id="color" name="color" type="text" required>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Año</label>
+                                                <input class="form-control" placeholder="Año" id="anio" name="anio" type="number" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <label>Placa</label>
+                                                <input class="form-control" placeholder="Placa" id="placa" name="placa" type="text" required>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <label>Número de Serie</label>
+                                                <input class="form-control" placeholder="Número de Serie" id="numero_serie" name="numero_serie" type="text" required>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <label>Valor</label>
+                                                <input class="form-control" placeholder="Valor" id="valor" name="valor" type="number" step="0.01" required>
+                                            </div>
+                                        </div>
 
+                                        <div class="form-group">
+                                            <div class="col-lg-5">
+                                                <br><input type="submit" value="Guardar" class="btn btn-primary">
+                                                <input type="hidden" name="cliente_id" value="<?php echo $cliente_id ?>" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Color</label>
-                                            <input class="form-control" placeholder="Color" id="color" name="color" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Año</label>
-                                            <input class="form-control" placeholder="Año" id="anio" name="anio" type="number" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Placa</label>
-                                            <input class="form-control" placeholder="Placa" id="placa" name="placa" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Número de Serie: </label>
-                                            <input class="form-control" placeholder="Número de Serie" id="numero_serie" name="numero_serie" type="text" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <br><input type="submit" value="Guardar" class="btn btn-primary">
-                                            <input type="hidden" name="cliente_id" value="<?php echo $cliente_id ?>" required>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
                         </div>
 
                         <!-- Change this to a button or input when using this as a form -->

@@ -1,8 +1,16 @@
 <?php
 require('../session.php');
 include('../../model/ModelVendedor.php');
+include('../../model/ModelVehiculo.php');
+include('../../model/ModelCliente.php');
+
 $model_vendedor = new ModelVendedor();
 $vendedores = $model_vendedor->get_vendedores();
+$model_vehiculo = new ModelVehiculo();
+$vehiculos = $model_vehiculo->getAll();
+$model_cliente = new ModelCliente();
+$tipos_cliente = $model_cliente->obtener_tipos_cliente();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,76 +71,103 @@ $vendedores = $model_vendedor->get_vendedores();
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="col-lg-12">
-                                <form method="POST" name="form1" action="/controller/clientes/insertar.php" autocomplete="off" id="formInsertar">
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Nombre</label>
-                                            <input class="form-control" placeholder="Nombre" id="nombre" name="nombre" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Fecha Nacimiento</label>
-                                            <input class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" type="text" value="" placeholder="DD/MM/AAAA">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Calle</label>
-                                            <input class="form-control" placeholder="Calle" id="calle" name="calle" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Número</label>
-                                            <input class="form-control" placeholder="Número" id="numero" name="numero" type="text" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Colonia</label>
-                                            <input class="form-control" placeholder="Colonia" id="colonia" name="colonia" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Ciudad</label>
-                                            <input class="form-control" placeholder="Ciudad" id="ciudad" name="ciudad" type="text" required>
-                                        </div>
-                                    </div>
+  <div class="col-lg-12">
+<form method="POST" action="../../controller/clientes/insertar.php" id="formInsertar" autocomplete="off">
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
+        </div>
+    </div>
 
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Código Postal</label>
-                                            <input class="form-control" placeholder="Código Postal" id="codigo_postal" name="codigo_postal" type="text">
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Estado</label>
-                                            <input class="form-control" placeholder="Estado" id="estado" name="estado" type="text" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Teléfono </label>
-                                            <input class="form-control" placeholder="Teléfono" id="telefono" name="telefono" type="text" required>
-                                        </div>
-                                        <div class="col-lg-5">
-                                            <label>Teléfono Alternativo </label>
-                                            <input class="form-control" placeholder="Teléfono" id="telefono_alternativo" name="telefono_alternativo" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <label>Vendedor:</label>
-                                            <select class="form-control" name="vendedor" id="vendedor" onchange="click(),darclick();">
-                                                <option selected>NO ASIGNADO</option>
-                                                <?php foreach ($vendedores as $vendedor) : ?>
-                                                    <option value='<?php echo $vendedor["idvendedor"] ?>'><?php echo $vendedor["nombre"] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-lg-5">
-                                            <br><input type="submit" value="Guardar" class="btn btn-primary">
-                                        </div>
-                                    </div>
-                                </form>
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="calle">Calle</label>
+            <input type="text" class="form-control" id="calle" name="calle" placeholder="Calle" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="numero">Número</label>
+            <input type="number" class="form-control" id="numero" name="numero" placeholder="Número" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="colonia">Colonia</label>
+            <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Colonia" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" class="form-control" id="ciudad" name="ciudad" placeholder="Ciudad" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="codigo_postal">Código Postal</label>
+            <input type="text" pattern="\d{5}" class="form-control" id="codigo_postal" name="codigo_postal" placeholder="Código Postal" title="Debe contener 5 dígitos">
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="estado">Estado</label>
+            <input type="text" class="form-control" id="estado" name="estado" placeholder="Estado" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono" placeholder="Teléfono" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="telefono_alternativo">Teléfono Alternativo</label>
+            <input type="tel" class="form-control" id="telefono_alternativo" name="telefono_alternativo" placeholder="Teléfono Alternativo">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="vendedor">Verificador</label>
+            <select class="form-control" name="vendedor" id="vendedor" onchange="click(), darclick();">
+                <option selected>NO ASIGNADO</option>
+                <?php foreach ($vendedores as $vendedor) : ?>
+                    <option value="<?php echo $vendedor['idvendedor']; ?>"><?php echo $vendedor['nombre']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group col-lg-6">
+            <label for="tipo_cliente">Tipo de Cliente</label>
+            <select class="form-control" name="tipo_cliente" id="tipo_cliente" required>
+                <option value="">Seleccione un tipo</option>
+                <?php foreach ($tipos_cliente as $tipo) : ?>
+                    <option value="<?php echo $tipo['id']; ?>"><?php echo $tipo['nombre']; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-lg-6">
+            <label for="curp">CURP</label>
+            <input type="text" class="form-control" id="curp" name="curp" placeholder="CURP" required>
+        </div>
+        <div class="form-group col-lg-6">
+            <label for="fecha_registro">Fecha de Registro</label>
+            <input type="date" class="form-control" id="fecha_registro" name="fecha_registro" value="<?php echo date('Y-m-d'); ?>">
+        </div>
+    </div>
+
+    <div class="form-group mt-4">
+        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+    </div>
+</form>
+</div>
+
+
                             </div>
                         </div>
 
@@ -183,21 +218,7 @@ $vendedores = $model_vendedor->get_vendedores();
             });
         });
 
-        $("#formInsertar").submit(function() {
-            var fecha_nacimiento = $("#fecha_nacimiento").val();
-            if(fecha_nacimiento != ""){
-                if(regExValidateDate.test(fecha_nacimiento)){
-                    return true;
-                }
-                else{
-                    alert("Ingresa una fecha válida DD/MM/AAAA");
-                   return false;
-                }
-            }   
-            else{
-                return true;
-            }
-        });
+        
     </script>
 
 </body>

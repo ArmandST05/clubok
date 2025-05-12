@@ -154,7 +154,7 @@ if ($ultima_poliza) {
                                         <label>Tipo: </label>
                                     </div>
                                     <div class="col-lg-4">
-                                        <?php echo $vehiculo["tipo"]; ?>
+                                        <?php echo $vehiculo["tipo_id"]; ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -210,7 +210,7 @@ if ($ultima_poliza) {
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Vendedor:</label>
+                                        <label>Verificador:</label>
                                         <select class="form-control" name="vendedor" id="vendedor" required>
                                             <?php foreach ($vendedores as $vendedor) : ?>
                                                 <option value='<?php echo $vendedor["idvendedor"] ?>'><?php echo $vendedor["nombre"] ?></option>
@@ -250,8 +250,7 @@ if ($ultima_poliza) {
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Beneficiarios de servicios funerarios:</label>
-                                        <textarea class='form-control' name='beneficiarios_funeraria' id='beneficiarios_funeraria'></textarea>
+                                        <a href="./beneficiarios.php" class="btn btn-primary">Beneficiarios de servicios funerarios:</a>
                                     </div>
                                 </div>
                             </div>

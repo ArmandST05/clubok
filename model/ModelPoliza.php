@@ -169,7 +169,7 @@ class ModelPoliza
 			clientes.fecha_nacimiento AS cliente_fecha_nacimiento,
 			DATE_FORMAT(clientes.fecha_nacimiento,'%d/%m/%Y') AS fecha_nacimiento_formato,
 			vendedores.nombre AS vendedor_nombre,
-			vehiculos.marca AS vehiculo_marca, vehiculos.tipo AS vehiculo_tipo,
+			vehiculos.marca AS vehiculo_marca, vehiculos.tipo_id AS vehiculo_tipo,
 			vehiculos.color AS vehiculo_color, vehiculos.placa AS vehiculo_placa,
 			vehiculos.numero_serie AS vehiculo_numero_serie, vehiculos.anio AS vehiculo_anio,
 			(SELECT SUM(cantidad) FROM abonos WHERE abonos.poliza_id = polizas.idpoliza) AS total_abonos,
@@ -186,54 +186,68 @@ class ModelPoliza
 
 		return $sql;
 	}
+function get_polizas_estatus($estatusId)
+{
+    $fecha_actual = date("Y-m-d");
 
-	//Obtiente las pólizas por estatus
-	function get_polizas_estatus($estatusId)
-	{
-		$fecha_actual = date("Y-m-d");
+    // Se obtienen las pólizas que son de este año y las que son de años anteriores que no se terminaron de pagar.
+    $query = "SELECT polizas.*, 
+       DATE_FORMAT(polizas.fecha_inicio, '%d/%m/%Y') AS fecha_inicio_formato,
+       DATE_FORMAT(polizas.fecha_fin, '%d/%m/%Y') AS fecha_fin_formato, 
+       DATE_FORMAT(polizas.fecha_estatus, '%d/%m/%Y') AS fecha_estatus_formato,
+       coberturas.nombre AS cobertura_nombre,
+       clientes.nombre AS cliente_nombre,
+       clientes.direccion_calle AS cliente_direccion_calle,
+       clientes.direccion_colonia AS cliente_direccion_colonia,
+       clientes.direccion_ciudad AS cliente_direccion_ciudad,
+       clientes.direccion_estado AS cliente_direccion_estado,
+       clientes.direccion_codigo_postal AS cliente_direccion_codigo_postal,
+       clientes.direccion_numero AS cliente_direccion_numero,
+       clientes.telefono AS cliente_telefono,
+       clientes.telefono_alternativo AS cliente_telefono_alternativo,
+       clientes.fecha_nacimiento AS cliente_fecha_nacimiento,
+       DATE_FORMAT(clientes.fecha_nacimiento, '%d/%m/%Y') AS fecha_nacimiento_formato,
+       vendedores.nombre AS vendedor_nombre,
+       vehiculos.marca AS vehiculo_marca,
+       vehiculos.tipo_id AS vehiculo_tipo,
+       vehiculos.color AS vehiculo_color,
+       vehiculos.placa AS vehiculo_placa,
+       vehiculos.numero_serie AS vehiculo_numero_serie,
+       vehiculos.anio AS vehiculo_anio,
+       tipos_vehiculos.id,  -- Verifica si esta columna está correcta
+       (SELECT SUM(cantidad) FROM abonos WHERE abonos.poliza_id = polizas.idpoliza) AS total_abonos,
+       (SELECT COUNT(idabono) FROM abonos WHERE abonos.poliza_id = polizas.idpoliza) AS cantidad_abonos,
+       (SELECT DATE_FORMAT(fecha, '%d/%m/%Y') FROM abonos WHERE abonos.poliza_id = polizas.idpoliza ORDER BY fecha DESC LIMIT 1) AS fecha_ultimo_abono,
+       prc.nombre AS poliza_respaldo_compania_nombre 
+FROM polizas
+INNER JOIN coberturas ON polizas.cobertura_id = coberturas.idcobertura
+INNER JOIN clientes ON polizas.cliente_id = clientes.idcliente
+INNER JOIN vendedores ON polizas.vendedor_id = vendedores.idvendedor
+INNER JOIN vehiculos ON polizas.vehiculo_id = vehiculos.idvehiculo
+INNER JOIN tipos_vehiculos ON vehiculos.tipo_id = tipos_vehiculos.id  -- Verifica que este JOIN esté bien
+LEFT JOIN poliza_respaldo_companias prc ON prc.idpolizarespaldocompania = polizas.compania_poliza_respaldo_id
+";
+    
+    if ($estatusId == 1) { // Activas
+        $query .= " WHERE polizas.estatus = '$estatusId' AND polizas.fecha_fin >= '$fecha_actual' AND polizas.liquidado = 0 ";
+    } else if ($estatusId == 2) { // Canceladas
+        $query .= " WHERE polizas.estatus = '$estatusId' ";
+    } else if ($estatusId == "paid") {
+        $query .= " WHERE polizas.liquidado = 1 ";
+    } else if ($estatusId == "inactive") {
+        // Mostrar pólizas de años anteriores que estén pendientes por pagar
+        $query .= " WHERE polizas.estatus = 1 AND polizas.fecha_fin < '$fecha_actual' AND polizas.liquidado = 0 "; 
+    } else if ($estatusId == "pendingToPay") {
+        $query .= " WHERE (polizas.estatus != 2 AND polizas.liquidado = 0) "; // Mostrar pólizas pendientes por pagar que no estén canceladas
+    }
+    
+    $query .= " ORDER BY fecha_inicio";
+    $sql = $this->base_datos->query($query)->fetchAll();
 
-		//Se obtienen las pólizas que son de este año y las que son de años anteriores que no se terminaron de pagar.
-		$query = "SELECT polizas.*, DATE_FORMAT(polizas.fecha_inicio,'%d/%m/%Y') AS fecha_inicio_formato,
-					DATE_FORMAT(polizas.fecha_fin,'%d/%m/%Y') AS fecha_fin_formato, 
-					DATE_FORMAT(polizas.fecha_estatus,'%d/%m/%Y') AS fecha_estatus_formato,coberturas.nombre AS cobertura_nombre,
-					clientes.nombre AS cliente_nombre,clientes.direccion_calle AS cliente_direccion_calle,
-					clientes.direccion_colonia AS cliente_direccion_colonia,clientes.direccion_ciudad AS cliente_direccion_ciudad,
-					clientes.direccion_estado AS cliente_direccion_estado,clientes.direccion_codigo_postal AS cliente_direccion_codigo_postal,
-					clientes.direccion_numero AS cliente_direccion_numero,
-					clientes.telefono AS cliente_telefono, clientes.telefono_alternativo AS cliente_telefono_alternativo,
-					clientes.fecha_nacimiento AS cliente_fecha_nacimiento,
-					DATE_FORMAT(clientes.fecha_nacimiento,'%d/%m/%Y') AS fecha_nacimiento_formato,
-					vendedores.nombre AS vendedor_nombre,
-					vehiculos.marca AS vehiculo_marca, vehiculos.tipo AS vehiculo_tipo,
-					vehiculos.color AS vehiculo_color, vehiculos.placa AS vehiculo_placa,
-					vehiculos.numero_serie AS vehiculo_numero_serie, vehiculos.anio AS vehiculo_anio,
-					(SELECT SUM(cantidad) FROM abonos WHERE abonos.poliza_id = polizas.idpoliza) AS total_abonos,
-					(SELECT COUNT(idabono) FROM abonos WHERE abonos.poliza_id = polizas.idpoliza) AS cantidad_abonos,
-					(SELECT DATE_FORMAT(fecha,'%d/%m/%Y') FROM abonos WHERE abonos.poliza_id = polizas.idpoliza ORDER BY fecha DESC LIMIT 1) AS fecha_ultimo_abono,
-					prc.nombre AS poliza_respaldo_compania_nombre 
-					FROM polizas
-					INNER JOIN coberturas ON polizas.cobertura_id = coberturas.idcobertura
-					INNER JOIN clientes ON polizas.cliente_id = clientes.idcliente
-					INNER JOIN vendedores ON polizas.vendedor_id = vendedores.idvendedor
-					INNER JOIN vehiculos ON polizas.vehiculo_id = vehiculos.idvehiculo
-					LEFT JOIN poliza_respaldo_companias prc ON prc.idpolizarespaldocompania = polizas.compania_poliza_respaldo_id";
-					if ($estatusId == 1) {//Activas
-						$query .= " WHERE polizas.estatus = '$estatusId' AND polizas.fecha_fin >= '$fecha_actual' AND polizas.liquidado = 0 ";
-					}else if($estatusId == 2){//Canceladas
-						$query.=" WHERE polizas.estatus = '$estatusId' ";
-					}else if ($estatusId == "paid") {
-						$query .= " WHERE polizas.liquidado = 1 ";
-					} else if ($estatusId == "inactive") {
-						//Mostrar pólizas de años anteriores que estén pendientes por pagar
-						$query .= " WHERE polizas.estatus = 1 AND polizas.fecha_fin < '$fecha_actual' AND polizas.liquidado = 0 "; 
-					} else if ($estatusId == "pendingToPay") {
-						$query .= " WHERE (polizas.estatus != 2 AND polizas.liquidado = 0) "; //Mostrar pólizas pendientes por pagar que no estén canceladas
-					}
-		$query .= " ORDER BY fecha_inicio";
-		$sql = $this->base_datos->query($query)->fetchAll();
+    return $sql;
+}
 
-		return $sql;
-	}
+
 
 	function polizas_pendientes_cliente($cliente_id)
 	{
@@ -527,4 +541,21 @@ class ModelPoliza
 		$this->base_datos->delete("abonos", ["idabono[=]" => $abono_id]);
 	}
 	/*--------------ABONOS-------------------- */
+	function agregar_beneficiario($nombre, $fecha_nacimiento, $calle, $numero, $colonia, $ciudad, $codigo_postal, $estado, $telefono, $telefono_alternativo, $curp, $fecha_registro)
+{
+    return $this->base_datos->insert("beneficiarios", [
+        "nombre" => $nombre,
+        "fecha_nacimiento" => $fecha_nacimiento,
+        "direccion_calle" => $calle,
+        "direccion_numero" => $numero,
+        "direccion_colonia" => $colonia,
+        "direccion_ciudad" => $ciudad,
+        "direccion_codigo_postal" => $codigo_postal,
+        "direccion_estado" => $estado,
+        "telefono" => $telefono,
+        "telefono_alternativo" => $telefono_alternativo,
+        "curp" => $curp,
+        "fecha_registro" => $fecha_registro
+    ]);
+}
 }
